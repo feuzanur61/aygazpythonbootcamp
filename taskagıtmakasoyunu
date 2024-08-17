@@ -1,0 +1,50 @@
+print("Hoş geldiniz! Taş, kağıt, makas oyununa hoş geldiniz.")
+print("Oyunun kuralları basit: Taş taşı yener, kağıt taşı yener, makas kağıdı yener.")
+print("İki tur kazanan oyunun galibi olacaktır. Başlayalım!\n")
+
+import random
+
+options = ["taş", "kağıt", "makas"]
+play_again = "evet"
+total_rounds = 0
+player_wins = 0
+computer_wins = 0
+
+while play_again == "evet":
+    total_rounds = 0
+    player_wins = 0
+    computer_wins = 0
+    
+    while player_wins < 2 and computer_wins < 2:
+        total_rounds += 1
+        print(f"\nTur {total_rounds}:")
+        
+        while True:
+            player_choice = input("Taş mı, kağıt mı, makas mı? (taş/kağıt/makas): ").lower()
+            if player_choice in options:
+                break
+            else:
+                print("Geçersiz seçenek! Lütfen tekrar deneyin.")
+
+        computer_choice = random.choice(options)
+        print(f"Bilgisayarın seçimi: {computer_choice}")
+
+        if (player_choice == "taş" and computer_choice == "makas") or \
+           (player_choice == "kağıt" and computer_choice == "taş") or \
+           (player_choice == "makas" and computer_choice == "kağıt"):
+            print("Oyuncu kazandı!")
+            player_wins += 1
+        elif player_choice == computer_choice:
+            print("Berabere!")
+        else:
+            print("Bilgisayar kazandı!")
+            computer_wins += 1
+
+    if player_wins > computer_wins:
+        print("\nOyunun galibi: Oyuncu!")
+    else:
+        print("\nOyunun galibi: Bilgisayar!")
+
+    play_again = input("\nBaşka bir oyun oynamak ister misiniz? (evet/hayır): ").lower()
+    if play_again != "evet":
+        print("Tekrar bekleriz!")
